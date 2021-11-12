@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<article>
+    <a href="{{ url_for('film.create') }}" class="btn btn-primary mb-2 mt-2">New Film</a>
+    {% for film in films %}
+    <p>{{ film['name'] }}</p>
+    <p>{{ film['coming_out'].strftime('%Y-%m-%d') }}</p>
+    <form onsubmit="return confirm('Are you sure?')" action="{{ url_for('film.delete', id=film['id']) }}" method="post">
+        <a href="{{ url_for('film.update', id=film['id']) }}" class="btn btn-info mt-2">Edit</a>
+        <button class="btn btn-danger mt-2">Delete</button>
+    </form>
+    <hr>
+    {% endfor %}
+</article>
+{% endblock %}
